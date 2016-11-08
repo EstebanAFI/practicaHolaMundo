@@ -1,0 +1,10 @@
+Package: AFIHolaMundoAFJ
+Type: Package
+Title: AFIHolaMundoAFJ
+Version: 0.1
+Date: 2016-10-28
+Author: person("Alberto","Fuente",email=alberto.fuente@bbva.com,role=c("aut","cre"))
+Maintainer: <alberto.fuente@bbva.com>
+Description: Contiene dos funciones HolaMundo para imprimir por pantalla en Espannol e Ingles
+License: GPL-2
+LazyData: TRUE

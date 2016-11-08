@@ -1,0 +1,17 @@
+{
+    "contents" : "rm(list = ls())\n\ninstall.packages('locfit')\ninstall.packages('leaps')\nlibrary(locfit)\nlibrary(leaps)\n\nfolder_path <- 'C:/Users/docente-mds/Desktop/regresion_031116/'\nadvertising <- read.csv(paste0(folder_path, 'advertising.csv'), sep = ';', header = T)\n\nfull_model <- lm(mpg ~ ., data = advertising)\n\n# AIC, BIC y R^2_a del modelo\n\nAIC(full_model)\nBIC(full_model)\ncp(full_model)\nsummary(full_model)$adj.r.squared\n\n#######################################\n# ¿Cómo hacer best subset selection?\n#######################################\n\nbest_subset_model <- regsubsets(Sales ~ ., data = advertising)\nsummary(best_subset_model)\n\n# R^2\nsummary(best_subset_model)$rsq\n\n# R^2 ajustado\nsummary(best_subset_model)$adjr2\n\n# ¿Cuál es el mejor modelo?\nwhich.max(summary(best_subset_model)$adjr2)\n\n# Análisis gráfico\nplot(best_subset_model, scale = 'adjr2')\n\n# ¿Cuál es el modelo?\ncoef(best_subset_model, 2)\n\n########################################\n# ¿Cómo hacer forward selection?\n########################################\n\nfwd_model <- regsubsets(Sales ~ ., data = advertising, method = 'forward')\nsummary(fwd_model)\n\n########################################\n# ¿Cómo hacer backward selection?\n########################################\n\nbwd_model <- regsubsets(Sales ~ ., data = advertising, method = 'backward')\nsummary(bwd_model)\n\nmy_model <- lm(Sales ~ TV + Radio, data = advertising)\n\nplot(advertising$Sales, my_model$residuals, type = 'p', col = 'red')\n########################################\n# Relaciones no lineales?\n########################################\n\n# Puede que exista alguna relación no lineal\n\n#########################################\n# Varianza no constante?\n#########################################\n\n# Quizá se puede probar a tomar logaritmos\n\n#########################################\n# Outliers?\n#########################################\n\n# Quizá los que tienen residuo < -4\n\n#########################################\n# High leverage points?\n#########################################\n\nplot(hatvalues(my_model), col = 'red')\nwhich(hatvalues(my_model) > 0.03)\n",
+    "created" : 1478194856869.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4071026659",
+    "id" : "B1948446",
+    "lastKnownWriteTime" : 1478194510,
+    "path" : "C:/Users/jfuente/Desktop/Regresión lineal - Daniel Girela/2º clase/Regresión lineal - Daniel Girela/ejemplos_advertising.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
